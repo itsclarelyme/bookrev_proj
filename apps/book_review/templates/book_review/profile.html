@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <title>This is the user page that displays info about this user</title>
+
+
+</head>
+
+<body>
+	{{thisuser}}
+  <h1>{{thisuser.alias}}</h1>
+  <h3>Name: {{thisuser.first_name}} {{thisuser.last_name}}</h3>
+  <h3>Email: {{thisuser.email}}</h3>
+  <h3>Total Reviews: {{total}}</h3>
+
+  <div>
+  	<h4>Posted Reviews</h4>
+  	{% if reviews %}
+  		{% for review in reviews%}
+  			<p><a href="/display/{{review.book.id}}">{{review.book.title}}</a></p>
+  		{% endfor %}
+  	{% endif %}
+
+  </div>
+
+</body>
+
+</html>

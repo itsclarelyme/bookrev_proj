@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <title>This is the home page that displays all the most popular books and reviews</title>
+
+
+</head>
+
+<body>
+
+  <a href="/addbook"><button>Add Book and Review</button></a>
+  <a href="/"><button>LOGOUT</button></a>
+  <h1>Welcome {{thisuser.first_name}}!</h1>
+
+  <div>
+  	<h2>Recent Book Reviews:</h2><hr>
+  	{% if reviews %}
+  			{% for review in reviews|slice:":3" %}
+  				<a href="/display/{{review.book.id}}"><h3>{{review.book.title}}</h3></a>
+	  			<h5>Rating: {{review.rating}}</h5><br>
+  				<a href="/profile/{{review.commenter.id}}"><p>{{review.commenter.first_name}}</a> says:</p>
+  				<p>{{review.content}}</p>
+  				<p>{{review.created_at}}</p><hr>
+  			{% endfor %}
+  	{% endif %}
+
+
+  </div>
+
+  <div>
+  	<h2>Other Books with Reviews:</h2>
+  	{% if reviews %}
+  		{% for these in reviews %}
+  			<a href="/display/{{review.id}}"><h3>{{these.book.title}}</h3></a>
+  		{% endfor %}
+  	{% endif %}
+
+
+  </div>
+
+</body>
+
+</html>

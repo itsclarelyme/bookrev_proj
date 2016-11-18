@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <title>This is the book page that displays about this book</title>
+
+
+</head>
+
+<body>
+	<a href="/home"><button>HOME PAGE</button></a>
+	<a href="/"><button>LOGOUT</button></a>
+  <h1>Learn more about this book</h1>
+
+  <div>
+  	<h2>{{thisbook.title}}</h2>
+  	<h4>{{thisbook.author.name}}</h4>
+  	<p>{{thisbook.description}}</p>
+  </div><br><br>
+
+
+  <div>
+  	<h3>Reviews</h3><hr>
+  	{% if reviews %}
+  		{% for review in reviews %} 
+  			<p>Rating: {{review.rating}} Stars</p>
+  			<p><a href="/profile/{{review.commenter.id}}">{{review.commenter.first_name}}</a> says: {{review.content}}</p>
+  			<p>Posted on {{review.created_at}}</p><hr>
+  		{% endfor %}
+  	{% endif %}
+
+
+  </div>
+  	<h3>Add a Review</h3>
+  	<form action='/addreview/process' method="post">
+		{% csrf_token %}
+		<input type="hidden" name="book_id" value="{{thisbook.id}}">
+		<p>Review: <textarea name="comment"></textarea></p>
+		<p>Rating: 
+			<select name="rating">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select>
+		</p>
+		<input type="submit" value="Add Review">
+	</form>
+
+
+  <div>
+
+
+
+  </div>
+
+</body>
+
+</html>
